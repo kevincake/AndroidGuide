@@ -6,11 +6,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+
+import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -21,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.ifreedomer.com.androidguide.adapter.MainRvAdapter;
 import cn.ifreedomer.com.androidguide.adapter.NavExpandAdapter;
 import cn.ifreedomer.com.androidguide.event.ContentEvent;
 import cn.ifreedomer.com.androidguide.manager.NotifycationManager;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     List<NavExpandedModel> dataList;
     HashMap<NavExpandedModel, List<String>> listDataChild;
     private Toolbar mToolbar;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         expandableList.setGroupIndicator(null);
         NotifycationManager.getInstance().register(this);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        setContentRecycleView(null);
     }
 
     private void prepareListData() {
@@ -203,7 +209,18 @@ public class MainActivity extends AppCompatActivity {
         NotifycationManager.getInstance().unregister(this);
     }
 
-    public void setContentRecycleView(){
+    public void setContentRecycleView(List<ContentModel> contentModels) {
+        contentModels = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            ContentModel contentModel = new ContentModel();
+            contentModel.setContent("这是内容");
+            contentModel.setTitle("Usage"+i);
+            contentModel.setTime("2016.10.10");
+            contentModels.add(contentModel);
+        }
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.setAdapter(new MainRvAdapter(this,R.layout.rv_main_item,contentModels));
 
     }
 

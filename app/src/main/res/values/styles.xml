@@ -27,8 +27,19 @@
         <item name="android:textColor">@color/whiteHintColor</item>
     </style>
 
+    <style name="RvItemTitleStyle">
+        <item name="android:textSize">@dimen/sp20</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RvItemSubStyle">
+        <item name="android:textSize">@dimen/sp15</item>
+        <item name="android:textColor">@color/blackHintColor</item>
+    </style>
+
 
     <dimen name="sp15">15sp</dimen>
     <dimen name="sp17">17sp</dimen>
     <dimen name="sp25">25sp</dimen>
+    <dimen name="sp20">20sp</dimen>
 </resources>
