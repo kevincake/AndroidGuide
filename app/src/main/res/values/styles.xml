@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/blackTextColor</item>
+    </style>
+
+    <style name="expandGroupTextStyle">
+        <item name="android:textSize">@dimen/sp15</item>
+    </style>
+
+    <style name="expandChildTextStyle">
+        <item name="android:textSize">@dimen/sp17</item>
+    </style>
+
+    <style name="navigationTitleTextStyle">
+        <item name="android:textSize">@dimen/sp25</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+    </style>
+
+    <style name="navigationSubTitleTextStyle">
+        <item name="android:textSize">@dimen/sp15</item>
+        <item name="android:textColor">@color/whiteHintColor</item>
+    </style>
+
+
+    <dimen name="sp15">15sp</dimen>
+    <dimen name="sp17">17sp</dimen>
+    <dimen name="sp25">25sp</dimen>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Android Guide</string>
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+    <string name="please_login_in">please login in</string>
+    <string name="component">Component</string>
+    <string name="application">Application</string>
+    <string name="usage">Usage</string>
+    <string name="activity">Activity</string>
+    <string name="service">Service</string>
+    <string name="broadCast">BroadCast</string>
+    <string name="contentProvider">ContentProvider</string>
+    <string name="presisent">Persistent</string>
+    <string name="file">File</string>
+    <string name="shareprefrence">SharePrefrence</string>
+    <string name="sqlite">Sqlite</string>
+    <string name="contentprovider">ContentProvider</string>
+
+</resources>
