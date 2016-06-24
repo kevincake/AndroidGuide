@@ -10,6 +10,16 @@ import java.util.List;
  */
 public class NavExpandedModel {
     private String titleName = "";
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     private HashMap<SubTitleModel, List<ContentModel>> contentMap = new HashMap<>();
 
     public String getTitleName() {
@@ -28,5 +38,12 @@ public class NavExpandedModel {
         this.titleName = titleName;
     }
 
-
+    @Override
+    public String toString() {
+        return "NavExpandedModel{" +
+                "titleName='" + titleName + '\'' +
+                ", position=" + position +
+                ", contentMap=" + contentMap +
+                '}';
+    }
 }

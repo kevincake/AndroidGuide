@@ -28,6 +28,7 @@ import cn.ifreedomer.com.androidguide.util.LogUtil;
  */
 public class NavExpandAdapter extends BaseExpandableListAdapter implements ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener {
     private Context mContext;
+    public static final String TAG = "NavExpandAdapter";
     private List<NavExpandedModel> mDataList;
     //    private List<NavExpandedModel> mListDataHeader; // header titles
 //
@@ -39,6 +40,7 @@ public class NavExpandAdapter extends BaseExpandableListAdapter implements Expan
         this.mContext = context;
         this.expandList = mView;
         mDataList = dataList;
+        LogUtil.info(TAG,dataList.toString());
         expandList.setOnGroupClickListener(this);
         expandList.setOnChildClickListener(this);
     }

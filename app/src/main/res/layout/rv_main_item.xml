@@ -3,6 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp100"
                 android:minHeight="@dimen/dp100"
+                android:id="@+id/rootview"
                 android:padding="@dimen/dp15"
                 android:orientation="vertical">
 
@@ -15,10 +16,11 @@
         android:text="生命周期"/>
 
     <TextView
+        android:id="@+id/time_tv"
         android:layout_marginTop="@dimen/dp10"
         style="@style/RvItemSubStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_tv"
-        android:text="更新时间: 2016.10.10"/>
+        android:text="@string/time_wrap"/>
 </RelativeLayout>

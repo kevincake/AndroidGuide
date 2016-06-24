@@ -7,7 +7,7 @@ package cn.ifreedomer.com.androidguide.model;
  */
 public class SubTitleModel {
     private String subTitle;
-    private int position ;
+    private int position;
 
     public String getSubTitle() {
         return subTitle;
@@ -23,5 +23,13 @@ public class SubTitleModel {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "SubTitleModel{" +
+                "subTitle='" + subTitle + '\'' +
+                ", position=" + position +
+                '}';
     }
 }

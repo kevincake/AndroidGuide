@@ -28,5 +28,10 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.zhy:base-adapter:2.0.0'
     compile 'com.zzhoujay.richtext:richtext:1.1.0'
-//    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
+    compile 'us.feras.mdv:markdownview:1.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.atlassian.commonmark:commonmark:0.5.1'
+
+    //    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
+    compile files('src/main/libs/markdown4j-2.2.jar')
 }

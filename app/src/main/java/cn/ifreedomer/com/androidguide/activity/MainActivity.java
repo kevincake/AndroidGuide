@@ -1,5 +1,6 @@
-package cn.ifreedomer.com.androidguide;
+package cn.ifreedomer.com.androidguide.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,19 +19,24 @@ import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.adapter.MainRvAdapter;
 import cn.ifreedomer.com.androidguide.adapter.NavExpandAdapter;
+import cn.ifreedomer.com.androidguide.constants.Constants;
 import cn.ifreedomer.com.androidguide.event.ContentEvent;
 import cn.ifreedomer.com.androidguide.manager.NotifycationManager;
 import cn.ifreedomer.com.androidguide.model.ContentModel;
 import cn.ifreedomer.com.androidguide.model.NavExpandedModel;
 import cn.ifreedomer.com.androidguide.model.SubTitleModel;
+import cn.ifreedomer.com.androidguide.util.CacheUtil;
+import cn.ifreedomer.com.androidguide.util.ZipUtil;
 
 public class MainActivity extends AppCompatActivity {
     public static final int APPINDEX = 0;
@@ -60,7 +66,93 @@ public class MainActivity extends AppCompatActivity {
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        prepareListData();
+        Unzip();;
+
+
+
+    }
+
+    public void Unzip() {
+        new AsyncTask<String, Integer, String>() {
+
+            @Override
+            protected String doInBackground(String... params) {
+                ZipUtil.UnZipMarkdown();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                parseAllData();
+            }
+        }.execute();
+    }
+
+
+    public void parseAllData() {
+        try {
+            String rootFolder = CacheUtil.getAppCacheDir() + Constants.MARKDOWN;
+            File rootFile = new File(rootFolder);
+            String[] markdowns = rootFile.list();
+            dataList = new ArrayList<NavExpandedModel>();
+            NavExpandedModel applicationModel = null;
+            for (int i = 0; i < markdowns.length; i++) {
+                if (markdowns[i].startsWith("."))continue;
+                applicationModel = new NavExpandedModel();
+                dataList.add(applicationModel);
+                String[] split = markdowns[i].split("_");
+                //position
+                applicationModel.setPosition(Integer.parseInt(split[0]));
+                //name
+                applicationModel.setTitleName(split[1]);
+
+                HashMap<SubTitleModel, List<ContentModel>> contentMap = applicationModel.getContentMap();
+                String secondPath = rootFolder+"/"+markdowns[i];
+                File file = new File(secondPath);
+                String[] list = file.list();
+                if (list==null)continue;
+                for (int j = 0; j < list.length; j++) {
+                    if(list[j].startsWith(".")){
+                        continue;
+                    }
+                    SubTitleModel subTitleModel = new SubTitleModel();
+                    if (!list[j].contains("_")){
+                        continue;
+                    }
+                    String[] fileNameSplit = list[j].split("_");
+                    subTitleModel.setPosition(Integer.parseInt(fileNameSplit[0]));
+                    subTitleModel.setSubTitle(fileNameSplit[1]);
+                    File subFile = new File(secondPath+"/"+list[j]);
+                    String[] subFileList = subFile.list();
+
+                    List<ContentModel> contentModels = new ArrayList<>();
+                    for (int k = 0; k < subFileList.length; k++) {
+                        if(subFileList[k].startsWith(".")){
+                            continue;
+                        }
+                        String[] subsubFiles = subFileList[k].split("_");
+                        ContentModel contentModel = new ContentModel();
+                        contentModel.setRealFileName(rootFolder+"/"+markdowns[i]+"/"+list[j]+"/"+subFileList[k]);
+                        contentModel.setTime(System.currentTimeMillis());
+                        contentModel.setContent(subFileList[k]);
+                        contentModel.setTitle(subsubFiles[1].substring(0,subsubFiles[1].length()-".md".length()));
+                        contentModel.setPosition(Integer.parseInt(subsubFiles[0]));
+                        contentModels.add(contentModel);
+                    }
+                    contentMap.put(subTitleModel,contentModels);
+                    sort(contentMap);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        setNavUI();
+    }
+
+
+    private void setNavUI() {
         mMenuAdapter = new NavExpandAdapter(this, dataList, expandableList);
 
         // setting list adapter
@@ -70,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
         expandableList.setGroupIndicator(null);
         NotifycationManager.getInstance().register(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
-        setContentRecycleView(null);
+//        setContentRecycleView(null);
+
+//        setContentRecycleView(null);
     }
 
     private void prepareListData() {
@@ -210,17 +304,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setContentRecycleView(List<ContentModel> contentModels) {
+        if (contentModels==null||contentModels.isEmpty())
         contentModels = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ContentModel contentModel = new ContentModel();
-            contentModel.setContent("这是内容");
-            contentModel.setTitle("Usage"+i);
-            contentModel.setTime("2016.10.10");
-            contentModels.add(contentModel);
-        }
+
+//        for (int i = 0; i < 10; i++) {
+//            ContentModel contentModel = new ContentModel();
+//            contentModel.setContent("这是内容");
+//            contentModel.setTitle("Usage" + i);
+//            contentModel.setTime("2016.10.10");
+//            contentModels.add(contentModel);
+//        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        mRecyclerView.setAdapter(new MainRvAdapter(this,R.layout.rv_main_item,contentModels));
+        MainRvAdapter mainRvAdapter = new MainRvAdapter(this, R.layout.rv_main_item, contentModels);
+        mRecyclerView.setAdapter(mainRvAdapter);
 
     }
 
@@ -231,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         List<ContentModel> contentModels = contentEvent.getContentModels();
         String title = contentEvent.getSubTitle();
         mToolbar.setTitle(title);
+        setContentRecycleView(contentModels);
     }
 
 }
