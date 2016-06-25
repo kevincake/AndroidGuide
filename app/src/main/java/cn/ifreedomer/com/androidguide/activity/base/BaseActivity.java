@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import cn.ifreedomer.com.androidguide.R;
 
 
-public class BaseActivity extends AppCompatActivity {
+public  class BaseActivity extends AppCompatActivity {
 
     public Toolbar mActionBarToolbar;
 
@@ -45,9 +45,10 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
+
     protected Toolbar getActionBarToolbar() {
         if (mActionBarToolbar == null) {
-            mActionBarToolbar = (Toolbar) findViewById(R.id.phone_toolbar);
+            mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
             if (mActionBarToolbar != null) {
                 setSupportActionBar(mActionBarToolbar);
                 mActionBarToolbar.setNavigationIcon(R.mipmap.back);
@@ -59,11 +60,14 @@ public class BaseActivity extends AppCompatActivity {
                     }
                 });
                 mActionBarToolbar.setTitleTextColor(getResources().getColor(R.color.whiteTextColor));
+//                setTitle();
             }
         }
 
         return mActionBarToolbar;
     }
+
+//    public abstract void setTitle();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

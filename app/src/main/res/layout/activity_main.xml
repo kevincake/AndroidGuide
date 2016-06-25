@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#30469b"/>
+            android:background="@color/colorPrimary"/>
         <!--内容显示布局-->
         <FrameLayout
             android:id="@+id/frame_content"

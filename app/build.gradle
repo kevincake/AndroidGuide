@@ -30,8 +30,10 @@ dependencies {
     compile 'com.zzhoujay.richtext:richtext:1.1.0'
     compile 'us.feras.mdv:markdownview:1.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.atlassian.commonmark:commonmark:0.5.1'
-
+    compile 'com.facebook.fresco:fresco:0.10.0'
+    compile 'com.flipboard:bottomsheet-core:1.5.0'
+    compile 'com.flipboard:bottomsheet-commons:1.5.0'
     //    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
     compile files('src/main/libs/markdown4j-2.2.jar')
+    compile files('src/main/libs/BmobPay_v3.0.3_160621.jar')
 }

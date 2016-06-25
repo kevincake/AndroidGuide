@@ -7,20 +7,14 @@
     android:orientation="vertical"
     tools:context="cn.ifreedomer.com.androidguide.activity.ReaderActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/phone_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#30469b"
-        />
-
+    <include layout="@layout/toolbar"/>
     <!--<ScrollView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
 
-        <us.feras.mdv.MarkdownView
-            android:id="@+id/markdownview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    <us.feras.mdv.MarkdownView
+        android:id="@+id/markdownview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <!--</ScrollView>-->
 </LinearLayout>

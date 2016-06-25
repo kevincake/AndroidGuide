@@ -6,13 +6,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
@@ -24,9 +27,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
+import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
 import cn.ifreedomer.com.androidguide.adapter.MainRvAdapter;
 import cn.ifreedomer.com.androidguide.adapter.NavExpandAdapter;
 import cn.ifreedomer.com.androidguide.constants.Constants;
@@ -36,12 +45,24 @@ import cn.ifreedomer.com.androidguide.model.ContentModel;
 import cn.ifreedomer.com.androidguide.model.NavExpandedModel;
 import cn.ifreedomer.com.androidguide.model.SubTitleModel;
 import cn.ifreedomer.com.androidguide.util.CacheUtil;
+import cn.ifreedomer.com.androidguide.util.IntentUtils;
+import cn.ifreedomer.com.androidguide.util.LogUtil;
 import cn.ifreedomer.com.androidguide.util.ZipUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = "MainActivity";
     public static final int APPINDEX = 0;
     public static final int COMPONENT_INDEX = 1;
     public static final int PRESISENT_INDEX = 2;
+
+    @Bind(R.id.frame_content)
+    FrameLayout frameContent;
+    @Bind(R.id.navigationmenu)
+    ExpandableListView navigationmenu;
+    @Bind(R.id.navigation_view)
+    NavigationView navigationView;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
     private DrawerLayout mDrawerLayout;
     NavExpandAdapter mMenuAdapter;
     ExpandableListView expandableList;
@@ -54,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NotifycationManager.getInstance().register(this);
+        ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar supportActionBar = getSupportActionBar();
@@ -61,16 +84,22 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(getResources().getColor(R.color.whiteTextColor));
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ImageView buyIv = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.buy_iv);
+        buyIv.setOnClickListener(this);
+        TextView loginTv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.login_tv);
+        loginTv.setOnClickListener(this);
         expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        Unzip();;
-
+        Unzip();
+        ;
 
 
     }
+
+
 
     public void Unzip() {
         new AsyncTask<String, Integer, String>() {
@@ -98,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             dataList = new ArrayList<NavExpandedModel>();
             NavExpandedModel applicationModel = null;
             for (int i = 0; i < markdowns.length; i++) {
-                if (markdowns[i].startsWith("."))continue;
+                if (markdowns[i].startsWith(".")) continue;
                 applicationModel = new NavExpandedModel();
                 dataList.add(applicationModel);
                 String[] split = markdowns[i].split("_");
@@ -108,43 +137,47 @@ public class MainActivity extends AppCompatActivity {
                 applicationModel.setTitleName(split[1]);
 
                 HashMap<SubTitleModel, List<ContentModel>> contentMap = applicationModel.getContentMap();
-                String secondPath = rootFolder+"/"+markdowns[i];
+                String secondPath = rootFolder + "/" + markdowns[i];
                 File file = new File(secondPath);
                 String[] list = file.list();
-                if (list==null)continue;
+                if (list == null) continue;
                 for (int j = 0; j < list.length; j++) {
-                    if(list[j].startsWith(".")){
+                    if (list[j].startsWith(".")) {
                         continue;
                     }
                     SubTitleModel subTitleModel = new SubTitleModel();
-                    if (!list[j].contains("_")){
-                        continue;
-                    }
                     String[] fileNameSplit = list[j].split("_");
                     subTitleModel.setPosition(Integer.parseInt(fileNameSplit[0]));
                     subTitleModel.setSubTitle(fileNameSplit[1]);
-                    File subFile = new File(secondPath+"/"+list[j]);
+                    File subFile = new File(secondPath + "/" + list[j]);
                     String[] subFileList = subFile.list();
 
                     List<ContentModel> contentModels = new ArrayList<>();
+                    contentMap.put(subTitleModel, contentModels);
+
+                    if (subFileList == null || subFileList.length == 0) continue;
+                    ;
                     for (int k = 0; k < subFileList.length; k++) {
-                        if(subFileList[k].startsWith(".")){
+                        if (subFileList[k].startsWith(".")) {
                             continue;
                         }
+
                         String[] subsubFiles = subFileList[k].split("_");
                         ContentModel contentModel = new ContentModel();
-                        contentModel.setRealFileName(rootFolder+"/"+markdowns[i]+"/"+list[j]+"/"+subFileList[k]);
+                        contentModel.setRealFileName(rootFolder + "/" + markdowns[i] + "/" + list[j] + "/" + subFileList[k]);
                         contentModel.setTime(System.currentTimeMillis());
                         contentModel.setContent(subFileList[k]);
-                        contentModel.setTitle(subsubFiles[1].substring(0,subsubFiles[1].length()-".md".length()));
+                        contentModel.setTitle(subsubFiles[1].substring(0, subsubFiles[1].length() - ".md".length()));
                         contentModel.setPosition(Integer.parseInt(subsubFiles[0]));
                         contentModels.add(contentModel);
                     }
-                    contentMap.put(subTitleModel,contentModels);
                     sort(contentMap);
+
                 }
 
             }
+            LogUtil.error(TAG,dataList.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,9 +193,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         expandableList.setGroupIndicator(null);
-        NotifycationManager.getInstance().register(this);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
-//        setContentRecycleView(null);
+        Set<Map.Entry<SubTitleModel, List<ContentModel>>> entries = dataList.get(0).getContentMap().entrySet();
+        Iterator<Map.Entry<SubTitleModel, List<ContentModel>>> iterator = entries.iterator();
+//        for ()
+        List<ContentModel> value = iterator.next().getValue();
+        setContentRecycleView(value);
 
 //        setContentRecycleView(null);
     }
@@ -271,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -304,8 +342,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setContentRecycleView(List<ContentModel> contentModels) {
-        if (contentModels==null||contentModels.isEmpty())
-        contentModels = new ArrayList<>();
+        if (contentModels == null || contentModels.isEmpty())
+            contentModels = new ArrayList<>();
 
 //        for (int i = 0; i < 10; i++) {
 //            ContentModel contentModel = new ContentModel();
@@ -322,6 +360,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     //eventbus 更新标题和内容
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onContentEvent(ContentEvent contentEvent) {
@@ -331,4 +370,17 @@ public class MainActivity extends AppCompatActivity {
         setContentRecycleView(contentModels);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.buy_iv:
+//                IntentUtils.startPayActivity(this);
+                parseAllData();
+                break;
+            case R.id.login_tv:
+                IntentUtils.startLoginActivity(this);
+                break;
+        }
+
+    }
 }

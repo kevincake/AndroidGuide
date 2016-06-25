@@ -18,7 +18,7 @@ public class ReaderActivity extends BaseActivity {
     @Bind(R.id.markdownview)
     MarkdownView markdownview;
     private String TAG = "ReaderActivity";
-    @Bind(R.id.phone_toolbar)
+    @Bind(R.id.toolbar)
     Toolbar phoneToolbar;
 
 
@@ -32,6 +32,7 @@ public class ReaderActivity extends BaseActivity {
 //            markdownView.loadMarkdown();
 
             String html = new Markdown4jProcessor().process(FileUtil.readSDFile(stringExtra));
+
             markdownview.loadMarkdown(html);
 
 
@@ -43,4 +44,6 @@ public class ReaderActivity extends BaseActivity {
 
 
     }
+
+
 }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:fresco="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:clickable="true"
+              android:orientation="vertical">
+
+
+    <include layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            android:orientation="vertical">
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp100">-->
+
+            <!--<com.facebook.drawee.view.SimpleDraweeView-->
+            <!--xmlns:fresco="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/profile_image"-->
+            <!--android:layout_width="@dimen/dp100"-->
+            <!--android:layout_height="@dimen/dp100"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--fresco:actualImageScaleType="fitCenter"-->
+            <!--fresco:placeholderImage="@mipmap/logo"-->
+            <!--fresco:placeholderImageScaleType="centerCrop"-->
+            <!--fresco:roundAsCircle="true"-->
+            <!--/>-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<EditText-->
+            <!--android:id="@+id/phonenum_et"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+
+
+            <!--android:gravity="center"-->
+            <!--android:hint="@string/input_phonenum"-->
+
+
+            <!--android:text="18311362506"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<EditText-->
+
+            <!--android:id="@+id/pwd_et"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+
+            <!--android:gravity="center"-->
+            <!--android:hint="@string/please_input_acount"-->
+
+
+            <!--android:text="111111"/>-->
+            <!--</LinearLayout>-->
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/usernameWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="@dimen/dp80">
+
+                <EditText
+                    android:id="@+id/phonenum_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/account"
+                    android:inputType="phone"
+                    android:paddingLeft="15dp"
+                    android:text="18311362506"
+                    android:textSize="15sp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_rapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/pwd_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password_signin"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/dp15"
+                    android:text="111111"
+
+                    android:textSize="@dimen/sp15"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/login_btn"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="@string/login"
+              />
+
+            <TextView
+                android:id="@+id/login_forget_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/forget_pwd"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp50">
+
+                <ImageView
+                    android:id="@+id/wechat_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp50"
+                    android:layout_toLeftOf="@+id/sina_iv"/>
+
+                <ImageView
+                    android:id="@+id/qq_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp50"
+                    android:layout_toRightOf="@id/sina_iv"/>
+
+                <ImageView
+                    android:id="@+id/sina_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/goto_register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp50"
+            android:text="@string/register_now"
+            />
+    </RelativeLayout>
+</LinearLayout>

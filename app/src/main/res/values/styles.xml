@@ -36,6 +36,12 @@
         <item name="android:textSize">@dimen/sp15</item>
         <item name="android:textColor">@color/blackHintColor</item>
     </style>
+    <!--button-->
+    <style name="AppTheme.Button" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:textSize">@dimen/sp15</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+
+    </style>
 
 
     <dimen name="sp15">15sp</dimen>
