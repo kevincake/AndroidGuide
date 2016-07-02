@@ -87,13 +87,13 @@
                 android:layout_marginTop="@dimen/dp80">
 
                 <EditText
-                    android:id="@+id/phonenum_et"
+                    android:id="@+id/account_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/account"
                     android:inputType="phone"
                     android:paddingLeft="15dp"
-                    android:text="18311362506"
+                    android:text="375809600@qq.com"
                     android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -113,7 +113,7 @@
                     android:hint="@string/password_signin"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/dp15"
-                    android:text="111111"
+                    android:text="123456"
 
                     android:textSize="@dimen/sp15"/>
 

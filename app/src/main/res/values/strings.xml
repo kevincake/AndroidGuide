@@ -35,5 +35,22 @@
     <string name="signin">登陆</string>
     <string name="confirm_pwd">确认密码</string>
     <string name="login">登陆</string>
+    <string name="check_update">检查更新</string>
+    <string name="remove_ad">去除广告</string>
+    <string name="set_theme">设置主题</string>
+    <string name="comment_point">评分</string>
+    <string name="about">关于</string>
+    <string name="help">帮助与反馈</string>
+    <string name="quit">退出登陆</string>
+    <string name="close_send">关闭推送</string>
+    <string name="send_introduce">偶尔我可能会推段子,你可以关掉</string>
+    <string name="comment_introduce">你的鼓励让我做的更好</string>
+    <string name="app_introduce">App介绍</string>
+    <string name="operationing">正在执行操作中...</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="setup_profile_cancel">取消</string>
+    <string name="update_title">更新提示</string>
+    <string name="update_content">发现更新.是否更新?</string>
 
 </resources>

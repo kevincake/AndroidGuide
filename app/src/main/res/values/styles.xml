@@ -17,6 +17,7 @@
         <item name="android:textSize">@dimen/sp17</item>
     </style>
 
+
     <style name="navigationTitleTextStyle">
         <item name="android:textSize">@dimen/sp25</item>
         <item name="android:textColor">@color/whiteTextColor</item>
@@ -43,9 +44,38 @@
 
     </style>
 
+    <style name="setting_item_title">
+        <item name="android:textSize">@dimen/sp15</item>
+        <item name="android:textColor">@color/blackTextColor</item>
+    </style>
 
-    <dimen name="sp15">15sp</dimen>
-    <dimen name="sp17">17sp</dimen>
-    <dimen name="sp25">25sp</dimen>
-    <dimen name="sp20">20sp</dimen>
+    <style name="setting_item_subtitle">
+        <item name="android:textSize">@dimen/sp13</item>
+        <item name="android:textColor">@color/blackHintColor</item>
+    </style>
+
+
+    <!-- 弹出框动画 由下至上 -->
+    <style name="dialogStyle" >
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <!-- 进入时的动画 -->
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+
+        <!-- 退出时的动画 -->
+    </style>
+
+
+    <style name="cancelBtnStyle" >
+        <item name="android:textColor">@color/blue</item>
+    </style>
+    <!-- 对话框样式 -->
+    <style name="Theme.Light.Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
+
 </resources>

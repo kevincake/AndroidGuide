@@ -14,14 +14,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
+import cn.ifreedomer.com.androidguide.callback.SimpleRetrofitCallBack;
+import cn.ifreedomer.com.androidguide.manager.AppManager;
+import cn.ifreedomer.com.androidguide.model.LoginResult;
+import cn.ifreedomer.com.androidguide.model.UserModel;
 import cn.ifreedomer.com.androidguide.util.IntentUtils;
 
 public class SignInActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.phonenum_et)
-    EditText phonenumEt;
+    @Bind(R.id.account_et)
+    EditText accountEt;
     @Bind(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
     @Bind(R.id.pwd_et)
@@ -54,6 +58,20 @@ public class SignInActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn:
+                UserModel userModel = new UserModel();
+                userModel.setAccount(accountEt.getText().toString());
+                userModel.setPwd(pwdEt.getText().toString());
+                userModel.signIn(new SimpleRetrofitCallBack<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                        AppManager.getInstance().setUser(loginResult.getUser());
+                        AppManager.getInstance().setToken(loginResult.getToken());
+                        AppManager.getInstance().setLogin(true);
+                        IntentUtils.startMainActivity(SignInActivity.this);
+                        SignInActivity.this.finish();
+                    }
+                });
                 break;
             case R.id.login_forget_tv:
                 break;

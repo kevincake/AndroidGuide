@@ -1,5 +1,6 @@
 package cn.ifreedomer.com.androidguide.activity.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -11,11 +12,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import cn.ifreedomer.com.androidguide.R;
+import cn.ifreedomer.com.androidguide.widget.LoadingDialog;
 
 
-public  class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
     public Toolbar mActionBarToolbar;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,20 @@ public  class BaseActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public Dialog showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this, R.style.Theme_Light_Dialog);
+        }
+        loadingDialog.show();
+        return loadingDialog;
+    }
+
+    public void dismissDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
     }
 
 
@@ -102,7 +119,6 @@ public  class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         ActivityStackManager.getScreenManager().popActivity(this);
     }
-
 
 
     /**

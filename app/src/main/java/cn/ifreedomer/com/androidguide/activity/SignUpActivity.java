@@ -15,9 +15,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
+import cn.ifreedomer.com.androidguide.callback.SimpleRetrofitCallBack;
+import cn.ifreedomer.com.androidguide.manager.AppManager;
+import cn.ifreedomer.com.androidguide.model.LoginResult;
+import cn.ifreedomer.com.androidguide.model.UserModel;
+import cn.ifreedomer.com.androidguide.util.IntentUtils;
 
 public class SignUpActivity extends BaseActivity {
-
+    private static final String TAG = "SignUpActivity";
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.fullinfo_username_et)
@@ -55,7 +60,23 @@ public class SignUpActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fullinfo_commit_btn:
+                UserModel userModel = new UserModel();
+                userModel.setConfirmPwd(fullinfoPwdConfirmEt.getText().toString());
+                userModel.setPwd(fullinfoPwdEt.getText().toString());
+                userModel.setAccount(inputEmailEt.getText().toString());
+                userModel.setName(fullinfoUsernameEt.getText().toString());
+                userModel.setLogin(false);
+                userModel.signUp(new SimpleRetrofitCallBack<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
 
+                        AppManager.getInstance().setUser(loginResult.getUser());
+                        AppManager.getInstance().setToken(loginResult.getToken());
+                        AppManager.getInstance().setLogin(true);
+                        IntentUtils.startMainActivity(SignUpActivity.this);
+                        SignUpActivity.this.finish();
+                    }
+                });
                 break;
             case R.id.back2login_tv:
                 this.finish();

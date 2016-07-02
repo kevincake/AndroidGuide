@@ -40,10 +40,12 @@ import cn.ifreedomer.com.androidguide.adapter.MainRvAdapter;
 import cn.ifreedomer.com.androidguide.adapter.NavExpandAdapter;
 import cn.ifreedomer.com.androidguide.constants.Constants;
 import cn.ifreedomer.com.androidguide.event.ContentEvent;
+import cn.ifreedomer.com.androidguide.manager.AppManager;
 import cn.ifreedomer.com.androidguide.manager.NotifycationManager;
 import cn.ifreedomer.com.androidguide.model.ContentModel;
 import cn.ifreedomer.com.androidguide.model.NavExpandedModel;
 import cn.ifreedomer.com.androidguide.model.SubTitleModel;
+import cn.ifreedomer.com.androidguide.model.UserModel;
 import cn.ifreedomer.com.androidguide.util.CacheUtil;
 import cn.ifreedomer.com.androidguide.util.IntentUtils;
 import cn.ifreedomer.com.androidguide.util.LogUtil;
@@ -70,6 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     HashMap<NavExpandedModel, List<String>> listDataChild;
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
+    private TextView nameTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +87,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mToolbar.setTitleTextColor(getResources().getColor(R.color.whiteTextColor));
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ImageView buyIv = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.buy_iv);
-        buyIv.setOnClickListener(this);
-        TextView loginTv = (TextView) navigationView.getHeaderView(0).findViewById(R.id.login_tv);
-        loginTv.setOnClickListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        ImageView buyIv = (ImageView)headerView .findViewById(R.id.buy_iv);
+        if (buyIv!=null){
+            buyIv.setOnClickListener(this);
+        }
+
+        nameTv = (TextView) headerView.findViewById(R.id.login_tv);
+        ImageView settingIv = (ImageView) headerView.findViewById(R.id.setting_iv);
+        settingIv.setOnClickListener(this);
+        nameTv.setOnClickListener(this);
         expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
@@ -126,6 +135,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             String[] markdowns = rootFile.list();
             dataList = new ArrayList<NavExpandedModel>();
             NavExpandedModel applicationModel = null;
+            if (markdowns==null){
+                return;
+            }
             for (int i = 0; i < markdowns.length; i++) {
                 if (markdowns[i].startsWith(".")) continue;
                 applicationModel = new NavExpandedModel();
@@ -336,6 +348,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        UserModel userModel = AppManager.getInstance().getUser();
+        if (userModel!=null){
+            nameTv.setText(userModel.getName());
+            nameTv.setClickable(false);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         NotifycationManager.getInstance().unregister(this);
@@ -374,11 +396,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buy_iv:
-//                IntentUtils.startPayActivity(this);
-                parseAllData();
+                IntentUtils.startPayActivity(this);
+//                parseAllData();
                 break;
             case R.id.login_tv:
                 IntentUtils.startLoginActivity(this);
+                break;
+            case R.id.setting_iv:
+                IntentUtils.startSettingActivity(this);
                 break;
         }
 
