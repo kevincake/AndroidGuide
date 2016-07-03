@@ -6,6 +6,9 @@ import android.net.Uri;
 
 import java.io.File;
 
+import cn.ifreedomer.com.androidguide.activity.AboutActivity;
+import cn.ifreedomer.com.androidguide.activity.FeedBackActivity;
+import cn.ifreedomer.com.androidguide.activity.HelpActivity;
 import cn.ifreedomer.com.androidguide.activity.MainActivity;
 import cn.ifreedomer.com.androidguide.activity.PayActivity;
 import cn.ifreedomer.com.androidguide.activity.ReaderActivity;
@@ -56,4 +59,17 @@ public class IntentUtils {
         context.startActivity(intent);
     }
 
+    public static void startAboutActivity(Context context) {
+        Intent intent = new Intent(context, AboutActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startFeedbackActivity(Context context) {
+        Intent intent = new Intent(context, FeedBackActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startHelpActivity(Context context) {
+        context.startActivity(new Intent(context, HelpActivity.class));
+    }
 }

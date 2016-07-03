@@ -15,9 +15,13 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
+
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -65,6 +69,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     NavigationView navigationView;
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @Bind(R.id.ad_root_ll)
+    LinearLayout adRootLl;
     private DrawerLayout mDrawerLayout;
     NavExpandAdapter mMenuAdapter;
     ExpandableListView expandableList;
@@ -86,10 +92,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         supportActionBar.setHomeAsUpIndicator(R.mipmap.menu);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.whiteTextColor));
         supportActionBar.setDisplayHomeAsUpEnabled(true);
+        initNavgationView();
+        add_AD();
+        Unzip();
+        ;
+
+
+    }
+
+    private void initNavgationView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         View headerView = navigationView.getHeaderView(0);
-        ImageView buyIv = (ImageView)headerView .findViewById(R.id.buy_iv);
-        if (buyIv!=null){
+        ImageView buyIv = (ImageView) headerView.findViewById(R.id.buy_iv);
+        if (buyIv != null) {
             buyIv.setOnClickListener(this);
         }
 
@@ -102,12 +117,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        Unzip();
-        ;
-
-
     }
 
+    public void add_AD() {
+        AdView adView = new AdView(this, new AdSize(AdSize.FILL_PARENT, AdSize.WRAP_CONTENT));
+        adRootLl.addView(adView);
+    }
 
 
     public void Unzip() {
@@ -135,7 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             String[] markdowns = rootFile.list();
             dataList = new ArrayList<NavExpandedModel>();
             NavExpandedModel applicationModel = null;
-            if (markdowns==null){
+            if (markdowns == null) {
                 return;
             }
             for (int i = 0; i < markdowns.length; i++) {
@@ -188,7 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
 
             }
-            LogUtil.error(TAG,dataList.toString());
+            LogUtil.error(TAG, dataList.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -351,7 +366,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onStart() {
         super.onStart();
         UserModel userModel = AppManager.getInstance().getUser();
-        if (userModel!=null){
+        if (userModel != null) {
             nameTv.setText(userModel.getName());
             nameTv.setClickable(false);
         }
@@ -382,7 +397,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-
     //eventbus 更新标题和内容
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onContentEvent(ContentEvent contentEvent) {
@@ -394,7 +408,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.buy_iv:
                 IntentUtils.startPayActivity(this);
 //                parseAllData();

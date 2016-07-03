@@ -1,8 +1,20 @@
 package cn.ifreedomer.com.androidguide;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
+import android.os.Process;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.xiaomi.mipush.sdk.MiPushClient;
+
+import net.youmi.android.AdManager;
+
+import java.util.List;
+
+import cn.ifreedomer.com.androidguide.constants.Constants;
+import cn.ifreedomer.com.androidguide.constants.SaveConstants;
+import cn.ifreedomer.com.androidguide.util.SaveUtil;
 
 /**
  * @author:eavawu
@@ -23,15 +35,34 @@ public class GuideApplication extends Application {
         // 必须先初始化
 
         Fresco.initialize(this);
+        if (shouldInit() && SaveUtil.get(SaveConstants.ISPUSH)) {
+            initXiaoMIPush();
+        }
+
+        initWandoujiaADSDK();
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
+    private void initXiaoMIPush() {
+        MiPushClient.registerPush(this, Constants.XIAOMI_PUSNID, Constants.XIAOMI_PUSHKEY);
     }
 
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
+
+    public void initWandoujiaADSDK() {
+        AdManager.getInstance(mContext).init(Constants.YOUMI_ID, Constants.YOUMI_SCECRET, true);
     }
-}
+
+    private boolean shouldInit() {
+        ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
+        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+        String mainProcessName = getPackageName();
+        int myPid = Process.myPid();
+        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
+            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+};
+

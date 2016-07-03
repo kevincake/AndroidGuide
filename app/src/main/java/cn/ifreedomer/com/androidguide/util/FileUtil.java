@@ -31,11 +31,29 @@ public class FileUtil {
         return res;
     }
 
+    public static String inputStream2String(InputStream fis) {
+        String res = "";
+        int length = 0;
+        try {
+            length = fis.available();
+            byte[] buffer = new byte[length];
+            fis.read(buffer);
+
+            res = new String(buffer, "UTF-8");
+
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+
     public static void copyFile(InputStream inputStream, String s) {
         OutputStream outputStream = null;
         try {
             File file = new File(s);
-            if (!file.exists()){
+            if (!file.exists()) {
             }
             outputStream = new FileOutputStream(file);
             int bytesRead = 0;

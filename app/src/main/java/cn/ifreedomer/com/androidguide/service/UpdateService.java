@@ -3,14 +3,13 @@ package cn.ifreedomer.com.androidguide.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
-import cn.ifreedomer.com.androidguide.GuideApplication;
 import cn.ifreedomer.com.androidguide.callback.SimpleRetrofitCallBack;
 import cn.ifreedomer.com.androidguide.event.UpdateEvent;
 import cn.ifreedomer.com.androidguide.manager.NotifycationManager;
 import cn.ifreedomer.com.androidguide.model.UpdateInfo;
 import cn.ifreedomer.com.androidguide.network.HttpClient;
+import cn.ifreedomer.com.androidguide.util.AppInfoUtil;
 
 /**
  * @author:eavawu
@@ -39,22 +38,17 @@ public class UpdateService extends IntentService {
 
 
     public static void checkUpdate() {
-        String packageName = GuideApplication.getInstance().getPackageName();
-        try {
-            PackageInfo packageInfo = GuideApplication.getInstance().getPackageManager().getPackageInfo(packageName, 0);
-            if (packageInfo != null) {
-                final int versionCode = packageInfo.versionCode;
-                HttpClient.getInstance().getNewestVersion(versionCode, new SimpleRetrofitCallBack<UpdateInfo>() {
-                    @Override
-                    public void onSuccess(UpdateInfo update) {
-                        if (versionCode < update.getVersionCode()) {
-                            NotifycationManager.getInstance().post(new UpdateEvent(update));
-                        }
+        PackageInfo packageInfo = AppInfoUtil.getPackageInfo();
+        if (packageInfo != null) {
+            final int versionCode = packageInfo.versionCode;
+            HttpClient.getInstance().getNewestVersion(versionCode, new SimpleRetrofitCallBack<UpdateInfo>() {
+                @Override
+                public void onSuccess(UpdateInfo update) {
+                    if (versionCode < update.getVersionCode()) {
+                        NotifycationManager.getInstance().post(new UpdateEvent(update));
                     }
-                });
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+                }
+            });
         }
 
 

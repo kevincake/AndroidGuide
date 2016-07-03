@@ -16,7 +16,9 @@
     <style name="expandChildTextStyle">
         <item name="android:textSize">@dimen/sp17</item>
     </style>
-
+    <style name="hintColorText">
+        <item name="android:textColor">@color/blackHintColor</item>
+    </style>
 
     <style name="navigationTitleTextStyle">
         <item name="android:textSize">@dimen/sp25</item>
@@ -51,6 +53,17 @@
 
     <style name="setting_item_subtitle">
         <item name="android:textSize">@dimen/sp13</item>
+        <item name="android:textColor">@color/blackHintColor</item>
+    </style>
+
+
+    <style name="about_item_title">
+        <item name="android:textSize">@dimen/sp17</item>
+        <item name="android:textColor">@color/blackTextColor</item>
+    </style>
+
+    <style name="about_item_content">
+        <item name="android:textSize">@dimen/sp15</item>
         <item name="android:textColor">@color/blackHintColor</item>
     </style>
 

@@ -20,6 +20,11 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'src/main/libs' //this way we can find the .aar file in libs folder
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -37,9 +42,11 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.google.code.gson:gson:2.6.2'
+    //豌豆荚需要
     //    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
     compile files('src/main/libs/BmobPay_v3.0.3_160621.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('src/main/libs/markdown4j-2.2.jar')
     compile files('src/main/libs/zip4j_1.3.2.jar')
+    compile files('src/main/libs/YoumiSdk_v6.1.0_2016-02-26.jar')
+    compile files('src/main/libs/MiPush_SDK_Client_3_0_3.jar')
 }
