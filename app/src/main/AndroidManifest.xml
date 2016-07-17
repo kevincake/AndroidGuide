@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cn.ifreedomer.com.androidguide">
-
+    <!--网络状态-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--WIFI状态-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--允许联网-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--读取电话的状态-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--写SD卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--读SD卡-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>

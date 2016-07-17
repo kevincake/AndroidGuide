@@ -5,6 +5,7 @@ import android.content.Context;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+import java.io.File;
 import java.io.InputStream;
 
 import cn.ifreedomer.com.androidguide.GuideApplication;
@@ -25,6 +26,15 @@ public class ZipUtil {
 
             InputStream inputStream = instance.getResources().getAssets().open(Constants.MARKDOWN + ".zip", Context.MODE_WORLD_WRITEABLE);
             String outPutFile = CacheUtil.getAppCacheDir() + Constants.MARKDOWN + ".zip";
+            //delete last file
+            File outFile = new File(outPutFile);
+            if (outFile.exists()){
+                outFile.delete();
+            }
+            File cacheExtraFile = new File(CacheUtil.getAppCacheDir() + Constants.MARKDOWN);
+            if (cacheExtraFile.exists()){
+                cacheExtraFile.delete();
+            }
             FileUtil.copyFile(inputStream, outPutFile);
             UnZipFolder(outPutFile, CacheUtil.getAppCacheDir());
             LogUtil.info("file", "hello");
@@ -37,6 +47,7 @@ public class ZipUtil {
 
         try {
             ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
+            zipFile.setFileNameCharset("utf-8");
             if (zipFile.isEncrypted()) {
                 zipFile.setPassword("abc");
             }

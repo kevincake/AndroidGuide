@@ -2,6 +2,7 @@ package cn.ifreedomer.com.androidguide.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 
 import org.markdown4j.Markdown4jProcessor;
 
@@ -12,6 +13,7 @@ import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
 import cn.ifreedomer.com.androidguide.constants.IntentConstants;
 import cn.ifreedomer.com.androidguide.util.FileUtil;
 import cn.ifreedomer.com.androidguide.util.LogUtil;
+import cn.ifreedomer.com.androidguide.util.TempUtil;
 import us.feras.mdv.MarkdownView;
 
 public class ReaderActivity extends BaseActivity {
@@ -34,6 +36,10 @@ public class ReaderActivity extends BaseActivity {
             String html = new Markdown4jProcessor().process(FileUtil.readSDFile(stringExtra));
 
             markdownview.loadMarkdown(html);
+            if (!TextUtils.isEmpty(TempUtil.getTitleName())){
+                mActionBarToolbar.setTitle(TempUtil.getTitleName());
+               // TempUtil.setTitleName(null);
+            }
 
 
 //            markdownTv.setText(Html.fromHtml(html));

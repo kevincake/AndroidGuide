@@ -4,11 +4,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +32,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -55,7 +59,7 @@ import cn.ifreedomer.com.androidguide.util.IntentUtils;
 import cn.ifreedomer.com.androidguide.util.LogUtil;
 import cn.ifreedomer.com.androidguide.util.ZipUtil;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
     private static final String TAG = "MainActivity";
     public static final int APPINDEX = 0;
     public static final int COMPONENT_INDEX = 1;
@@ -76,6 +80,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ExpandableListView expandableList;
     List<NavExpandedModel> dataList;
     HashMap<NavExpandedModel, List<String>> listDataChild;
+    private List<ContentModel> allContentModels = new ArrayList<>();
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private TextView nameTv;
@@ -122,6 +127,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void add_AD() {
         AdView adView = new AdView(this, new AdSize(AdSize.FILL_PARENT, AdSize.WRAP_CONTENT));
         adRootLl.addView(adView);
+        adRootLl.setVisibility(View.GONE);
     }
 
 
@@ -197,6 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         contentModel.setTitle(subsubFiles[1].substring(0, subsubFiles[1].length() - ".md".length()));
                         contentModel.setPosition(Integer.parseInt(subsubFiles[0]));
                         contentModels.add(contentModel);
+                        allContentModels.add(contentModel);
                     }
                     sort(contentMap);
 
@@ -208,6 +215,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        sortNav(dataList);
         setNavUI();
     }
 
@@ -314,6 +322,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+
+    public void sortNav(List<NavExpandedModel> navExpandedModels) {
+        Collections.sort(navExpandedModels, new Comparator<NavExpandedModel>() {
+            @Override
+            public int compare(NavExpandedModel lhs, NavExpandedModel rhs) {
+                if (lhs.getPosition() > rhs.getPosition()) {
+                    return 1;
+                } else if (lhs.getPosition() < rhs.getPosition()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+
+    }
+
     public void sort(HashMap<SubTitleModel, List<ContentModel>> hashMap) {
         SubTitleModel[] subTitleModels = new SubTitleModel[hashMap.keySet().size()];
         subTitleModels = (SubTitleModel[]) hashMap.keySet().toArray(subTitleModels);
@@ -334,8 +358,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchViewMenuItem = menu.findItem(R.id.search_menu);
+        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchViewMenuItem);
+        mSearchView.setOnQueryTextListener(this);
+        int searchImgId = android.support.v7.appcompat.R.id.search_button; // I used the explicit layout ID of searchview's ImageView
+        ImageView v = (ImageView) mSearchView.findViewById(searchImgId);
+        v.setImageResource(R.mipmap.search);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        MenuItem item = menu.findItem(R.id.search_menu);
         return true;
     }
 
@@ -421,5 +458,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if (TextUtils.isEmpty(query)) {
+            return false;
+        }
+        if (allContentModels != null && !allContentModels.isEmpty()) {
+
+            List<ContentModel> contentModels = searchContentModel(query);
+            setContentRecycleView(contentModels);
+        }
+        return false;
+    }
+
+    public List<ContentModel> searchContentModel(String searchKey) {
+        List<ContentModel> contentModels = new ArrayList<>();
+        for (int i = 0; i < allContentModels.size(); i++) {
+            ContentModel contentModel = allContentModels.get(i);
+            if (contentModel.getTitle().toLowerCase().contains(searchKey.toLowerCase())) {
+                contentModels.add(contentModel);
+            }
+            ;
+        }
+        return contentModels;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        return false;
     }
 }

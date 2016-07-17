@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/blackTextColor</item>
+        <!--<item name="searchViewSearchIcon">@mimap/search</item>-->
+        <!--<item name="searchViewSearchIcon">@m</item>-->
     </style>
 
     <style name="expandGroupTextStyle">

@@ -12,6 +12,7 @@ import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.model.ContentModel;
 import cn.ifreedomer.com.androidguide.util.DateUtil;
 import cn.ifreedomer.com.androidguide.util.IntentUtils;
+import cn.ifreedomer.com.androidguide.util.TempUtil;
 
 /**
  * @author:eavawu
@@ -27,12 +28,14 @@ public class MainRvAdapter extends CommonAdapter<ContentModel> {
 
     @Override
     public void convert(ViewHolder holder, final ContentModel contentModel) {
+        TempUtil.setTitleName(contentModel.getTitle());
         holder.setOnClickListener(R.id.rootview, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentUtils.startReaderActivity(mContext,contentModel.getRealFileName());
             }
         });
+
         holder.setText(R.id.title_tv, contentModel.getTitle());
         holder.setText(R.id.time_tv, String.format(mContext.getString(R.string.time_wrap), DateUtil.getDateFot(contentModel.getTime())));
     }
