@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpClient {
     public static HttpClient httpClient = new HttpClient();
     //    public static final String BASE_URL = "http://115.28.38.189:8080/Beauty/";
-    public static final String BASE_URL = "http://192.168.0.103:8080/";
+    public static final String BASE_URL = "http://192.168.1.114:8080/";
     private static final int DEFAULT_TIMEOUT = 5;
     private UserHttpDef userHttpDef;
     private UpdateHttpDef updateHttpDef;
