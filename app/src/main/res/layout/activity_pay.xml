@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +12,51 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"/>
+    <RelativeLayout
+        android:background="@color/donate_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp200">
+        <TextView
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp20"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:text="@string/rechare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/free_iv"
+            android:layout_marginRight="@dimen/dp30"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:src="@mipmap/free_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginRight="@dimen/dp30"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_below="@+id/free_iv"
+            android:src="@mipmap/tool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp20"
+        android:orientation="vertical"
+        android:id="@+id/recharge_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/textpay_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="支付测试"/>
-</RelativeLayout>
+        android:text="@string/support_ten_yuan"/>
+</LinearLayout>

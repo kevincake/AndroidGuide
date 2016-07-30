@@ -73,5 +73,20 @@
     <string name="feedback_topic">AndroidGuide意见反馈</string>
     <string name="describe_problem">请描述您遇到的问题</string>
     <string name="common_point">评分</string>
+    <string name="donate">捐赠</string>
+    <string name="rechare">充值</string>
+    <string name="not_install_plugin">监测到本机尚未安装支付插件,无法进行支付,请先安装插件(无流量消耗)</string>
+    <string name="update_plugin">监测到本机的支付插件不是最新版,最好进行更新,请先更新插件(无流量消耗)</string>
+    <string name="manual_quary">支付结果未知,请稍后手动查询</string>
+    <string name="reinstall">监测到你尚未安装支付插件,无法进行支付,请先安装插件(已打包在本地,无流量消耗),安装结束后重新支付</string>
+    <string name="remove_add">移除广告</string>
+    <string name="open_grade_knowlege">开发高级内容</string>
+    <string name="remove_add_subtitle">轻松移除广告.有一个干净的阅读环境</string>
+    <string name="open_grade_content">开放高级内容</string>
+    <string name="upgrade_knowleage">IPC.Binder机制.设计模式.算法等知识</string>
+    <string name="support_ten_yuan">支持一波 | 10元</string>
+    <string name="update_knowleage">知识更新</string>
+    <string name="upadte_content">不定期更新知识库.共同进步</string>
+    <string name="support_money">支持一下|(任意金额均可)</string>
 
 </resources>

@@ -12,4 +12,5 @@
     <color name="dialogBgColor">#44000000</color>
     <color name="whiteColor">#FFFFFFFF</color>
     <color name="blue">#6D9EE1</color>
+    <color name="donate_color">#62C66D</color>
 </resources>

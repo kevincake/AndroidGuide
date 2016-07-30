@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +25,7 @@ import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
 import cn.ifreedomer.com.androidguide.constants.Constants;
 import cn.ifreedomer.com.androidguide.manager.AppManager;
+import cn.ifreedomer.com.androidguide.model.RechargeContentItem;
 import cn.ifreedomer.com.androidguide.util.IntentUtils;
 import cn.ifreedomer.com.androidguide.util.LogUtil;
 
@@ -28,6 +34,9 @@ public class PayActivity extends BaseActivity {
     @Bind(R.id.textpay_btn)
     Button textpayBtn;
     public static final int PLUGINVERSION = 7;
+    @Bind(R.id.recharge_content_layout)
+    LinearLayout rechargeContentLayout;
+    private List<RechargeContentItem> rechargeContentItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +50,41 @@ public class PayActivity extends BaseActivity {
         if (pluginVersion < PLUGINVERSION) {// 为0说明未安装支付插件, 否则就是支付插件的版本低于官方最新版
             Toast.makeText(
                     PayActivity.this,
-                    pluginVersion == 0 ? "监测到本机尚未安装支付插件,无法进行支付,请先安装插件(无流量消耗)"
-                            : "监测到本机的支付插件不是最新版,最好进行更新,请先更新插件(无流量消耗)", Toast.LENGTH_SHORT).show();
+                    pluginVersion == 0 ? getString(R.string.not_install_plugin)
+                            : getString(R.string.update_plugin), Toast.LENGTH_SHORT).show();
             installBmobPayPlugin("bp.db");
+        }
+        initData();
+    }
+
+    private void initData() {
+        RechargeContentItem removeAddItem = new RechargeContentItem();
+        removeAddItem.setHasRight(true);
+        removeAddItem.setTitle(getString(R.string.remove_add));
+        removeAddItem.setSubTitle(getString(R.string.remove_add_subtitle));
+        rechargeContentItems.add(removeAddItem);
+
+
+        RechargeContentItem openGradeItem = new RechargeContentItem();
+        openGradeItem.setHasRight(true);
+        openGradeItem.setTitle(getString(R.string.open_grade_content));
+        openGradeItem.setSubTitle(getString(R.string.upgrade_knowleage));
+        rechargeContentItems.add(openGradeItem);
+
+
+        RechargeContentItem updateItem = new RechargeContentItem();
+        updateItem.setHasRight(true);
+        updateItem.setTitle(getString(R.string.update_knowleage));
+        updateItem.setSubTitle(getString(R.string.upadte_content));
+        rechargeContentItems.add(updateItem);
+
+        for (RechargeContentItem item : rechargeContentItems) {
+            View view = View.inflate(this, R.layout.recharge_right_item, null);
+            TextView itemTitleTv = (TextView) view.findViewById(R.id.recharge_title_tv);
+            TextView itemSubTitle = (TextView) view.findViewById(R.id.recharge_subtitle_tv);
+            itemSubTitle.setText(item.getSubTitle());
+            itemTitleTv.setText(item.getTitle());
+            rechargeContentLayout.addView(view);
         }
     }
 
@@ -64,7 +105,7 @@ public class PayActivity extends BaseActivity {
             // 因为网络等原因,支付结果未知(小概率事件),出于保险起见稍后手动查询
             @Override
             public void unknow() {
-                Toast.makeText(PayActivity.this, "支付结果未知,请稍后手动查询", Toast.LENGTH_SHORT)
+                Toast.makeText(PayActivity.this, getString(R.string.manual_quary), Toast.LENGTH_SHORT)
                         .show();
             }
 
@@ -92,7 +133,7 @@ public class PayActivity extends BaseActivity {
                 if (code == -3) {
                     Toast.makeText(
                             PayActivity.this,
-                            "监测到你尚未安装支付插件,无法进行支付,请先安装插件(已打包在本地,无流量消耗),安装结束后重新支付",
+                            getString(R.string.reinstall),
                             Toast.LENGTH_SHORT).show();
                     installBmobPayPlugin("bp.db");
                 } else {
