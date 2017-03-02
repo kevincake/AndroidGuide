@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp15"
         android:background="@color/whiteColor"
-        android:text="@string/feedback_topic"
+        android:hint="@string/feedback_topic"
         android:inputType="text"
         android:minHeight="@dimen/dp50"
         android:textSize="@dimen/sp15"/>

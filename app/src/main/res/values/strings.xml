@@ -68,7 +68,7 @@
     <string name="github_title">Github:</string>
     <string name="send">发送</string>
     <string name="sender">发件人:</string>
-    <string name="valid_email">请输入有效的邮箱地址</string>
+    <string name="valid_email">邮箱地址</string>
     <string name="topic">主题:</string>
     <string name="feedback_topic">AndroidGuide意见反馈</string>
     <string name="describe_problem">请描述您遇到的问题</string>
