@@ -24,9 +24,7 @@ import c.b.PListener;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
 import cn.ifreedomer.com.androidguide.constants.Constants;
-import cn.ifreedomer.com.androidguide.manager.AppManager;
 import cn.ifreedomer.com.androidguide.model.RechargeContentItem;
-import cn.ifreedomer.com.androidguide.util.IntentUtils;
 import cn.ifreedomer.com.androidguide.util.LogUtil;
 
 public class PayActivity extends BaseActivity {
@@ -176,10 +174,10 @@ public class PayActivity extends BaseActivity {
 
     @OnClick(R.id.textpay_btn)
     public void onClick() {
-        if (AppManager.getInstance().getUser() == null) {
-            IntentUtils.startLoginActivity(this);
-            return;
-        }
+//        if (AppManager.getInstance().getUser() == null) {
+//            IntentUtils.startLoginActivity(this);
+//            return;
+//        }
         pay(true);
     }
 }

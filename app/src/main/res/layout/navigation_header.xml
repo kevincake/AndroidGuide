@@ -10,7 +10,6 @@
         android:layout_height="match_parent"/>
 
     <TextView
-
         android:id="@+id/header_tv"
         style="@style/navigationTitleTextStyle"
         android:layout_width="wrap_content"
@@ -28,7 +27,8 @@
         android:layout_below="@+id/header_tv"
         android:layout_marginLeft="@dimen/dp30"
         android:layout_marginTop="@dimen/dp15"
-        android:text="@string/please_login_in"/>
+        android:text="@string/please_login_in"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/setting_iv"
@@ -47,5 +47,6 @@
         android:layout_marginBottom="@dimen/dp15"
         android:layout_marginRight="@dimen/dp5"
         android:layout_toLeftOf="@+id/setting_iv"
-        android:src="@mipmap/buy"/>
+        android:src="@mipmap/buy"
+        android:visibility="invisible"/>
 </RelativeLayout>

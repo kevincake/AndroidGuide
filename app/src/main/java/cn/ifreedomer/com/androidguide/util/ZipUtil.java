@@ -29,7 +29,8 @@ public class ZipUtil {
             //delete last file
             File outFile = new File(outPutFile);
             if (outFile.exists()){
-                outFile.delete();
+                return;
+//                outFile.delete();
             }
             File cacheExtraFile = new File(CacheUtil.getAppCacheDir() + Constants.MARKDOWN);
             if (cacheExtraFile.exists()){

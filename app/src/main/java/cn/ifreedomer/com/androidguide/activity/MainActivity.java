@@ -1,5 +1,6 @@
 package cn.ifreedomer.com.androidguide.activity;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
@@ -75,6 +77,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     DrawerLayout drawerLayout;
     @Bind(R.id.ad_root_ll)
     LinearLayout adRootLl;
+    @Bind(R.id.progress_bar)
+    ProgressBar progressBar;
     private DrawerLayout mDrawerLayout;
     NavExpandAdapter mMenuAdapter;
     ExpandableListView expandableList;
@@ -84,6 +88,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private TextView nameTv;
+    private String LAST_UPDATE_TIME = "last_update_time";
+    private Long lastUpateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +106,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         initNavgationView();
         add_AD();
         Unzip();
-        ;
-
+        SharedPreferences config = this.getSharedPreferences("config", MODE_APPEND);
+        SharedPreferences.Editor edit = config.edit();
+        long l = System.currentTimeMillis();
+        this.lastUpateTime = config.getLong(LAST_UPDATE_TIME, l);
+        if (lastUpateTime == l) {
+            edit.putLong(LAST_UPDATE_TIME, l);
+            edit.commit();
+        }
 
     }
 
@@ -132,18 +144,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
 
     public void Unzip() {
+        progressBar.setVisibility(View.VISIBLE);
         new AsyncTask<String, Integer, String>() {
 
             @Override
             protected String doInBackground(String... params) {
                 ZipUtil.UnZipMarkdown();
+                parseAllData();
                 return null;
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                parseAllData();
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
             }
         }.execute();
     }
@@ -198,7 +225,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         String[] subsubFiles = subFileList[k].split("_");
                         ContentModel contentModel = new ContentModel();
                         contentModel.setRealFileName(rootFolder + "/" + markdowns[i] + "/" + list[j] + "/" + subFileList[k]);
-                        contentModel.setTime(System.currentTimeMillis());
+                        contentModel.setTime(lastUpateTime);
                         contentModel.setContent(subFileList[k]);
                         contentModel.setTitle(subsubFiles[1].substring(0, subsubFiles[1].length() - ".md".length()));
                         contentModel.setPosition(Integer.parseInt(subsubFiles[0]));
@@ -441,6 +468,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String title = contentEvent.getSubTitle();
         mToolbar.setTitle(title);
         setContentRecycleView(contentModels);
+        mDrawerLayout.closeDrawers();
     }
 
     @Override
