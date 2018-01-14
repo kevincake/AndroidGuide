@@ -42,6 +42,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.umeng.analytics:analytics:6.1.2'
+
     //豌豆荚需要
     //    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
     compile files('src/main/libs/BmobPay_v3.0.3_160621.jar')

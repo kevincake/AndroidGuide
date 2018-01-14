@@ -82,6 +82,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 itemView.setTitle(getString(R.string.check_update));
             }
             if (i == REMOVE_AD_INDEX) {
+                itemView.setVisibility(View.GONE);
                 itemView.setShowSwitch(true);
                 itemView.setTitle(getString(R.string.remove_ad));
                 itemView.setSwitchListner(this);
@@ -94,6 +95,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             }
 
             if (i == 2) {
+                itemView.setVisibility(View.GONE);
                 itemView.setShowSub(true);
                 itemView.setTitle(getString(R.string.close_send));
                 itemView.setShowSwitch(true);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android Guide</string>
+    <string name="app_name">Android入门指南</string>
     <string name="drawer_open">打开</string>
     <string name="drawer_close">关闭</string>
     <string name="please_login_in">please login in</string>

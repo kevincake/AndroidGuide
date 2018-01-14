@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
 import net.youmi.android.banner.AdSize;
@@ -490,4 +491,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         return false;
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 }
