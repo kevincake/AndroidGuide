@@ -10,7 +10,6 @@ import cn.ifreedomer.com.androidguide.activity.AboutActivity;
 import cn.ifreedomer.com.androidguide.activity.FeedBackActivity;
 import cn.ifreedomer.com.androidguide.activity.HelpActivity;
 import cn.ifreedomer.com.androidguide.activity.MainActivity;
-import cn.ifreedomer.com.androidguide.activity.PayActivity;
 import cn.ifreedomer.com.androidguide.activity.ReaderActivity;
 import cn.ifreedomer.com.androidguide.activity.SettingActivity;
 import cn.ifreedomer.com.androidguide.activity.SignInActivity;
@@ -30,8 +29,8 @@ public class IntentUtils {
     }
 
     public static void startPayActivity(Context context) {
-        Intent intent = new Intent(context, PayActivity.class);
-        context.startActivity(intent);
+//        Intent intent = new Intent(context, PayActivity.class);
+//        context.startActivity(intent);
     }
 
     public static void startLoginActivity(Context context) {

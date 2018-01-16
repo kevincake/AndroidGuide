@@ -5,19 +5,38 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "cn.ifreedomer.com.androidguide"
+        applicationId "cn.ifreedomer.com.androidlearn"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file("ifreedomer.jks")
+            storePassword "123456"
+            keyAlias "ifreedomer"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
+
+            signingConfig signingConfigs.release
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
 
+        debug {
+
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+
+
     }
+
 }
 
 repositories {
@@ -45,10 +64,7 @@ dependencies {
     compile 'com.umeng.analytics:analytics:6.1.2'
 
     //豌豆荚需要
-    //    compile group: 'com.jakewharton.retrolambda', name: 'retrolambda', version: '2.1.0-jake2'
-    compile files('src/main/libs/BmobPay_v3.0.3_160621.jar')
     compile files('src/main/libs/markdown4j-2.2.jar')
     compile files('src/main/libs/zip4j_1.3.2.jar')
-    compile files('src/main/libs/YoumiSdk_v6.1.0_2016-02-26.jar')
-    compile files('src/main/libs/MiPush_SDK_Client_3_0_3.jar')
+
 }

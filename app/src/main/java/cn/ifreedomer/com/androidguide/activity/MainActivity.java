@@ -24,8 +24,7 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
-import net.youmi.android.banner.AdSize;
-import net.youmi.android.banner.AdView;
+
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -126,9 +125,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     public void add_AD() {
-        AdView adView = new AdView(this, new AdSize(AdSize.FILL_PARENT, AdSize.WRAP_CONTENT));
-        adRootLl.addView(adView);
-        adRootLl.setVisibility(View.GONE);
+//        AdView adView = new AdView(this, new AdSize(AdSize.FILL_PARENT, AdSize.WRAP_CONTENT));
+//        adRootLl.addView(adView);
+//        adRootLl.setVisibility(View.GONE);
     }
 
 
@@ -442,6 +441,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String title = contentEvent.getSubTitle();
         mToolbar.setTitle(title);
         setContentRecycleView(contentModels);
+        mDrawerLayout.closeDrawers();
     }
 
     @Override

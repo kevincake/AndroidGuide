@@ -10,8 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.xiaomi.mipush.sdk.MiPushClient;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -19,10 +17,8 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.ifreedomer.com.androidguide.GuideApplication;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
-import cn.ifreedomer.com.androidguide.constants.Constants;
 import cn.ifreedomer.com.androidguide.constants.SaveConstants;
 import cn.ifreedomer.com.androidguide.event.UpdateEvent;
 import cn.ifreedomer.com.androidguide.manager.AppManager;
@@ -156,11 +152,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 boolean isPush = !SaveUtil.get(SaveConstants.ISPUSH);
                 SaveUtil.save(SaveConstants.ISPUSH, isPush);
                 itemView.setCheck(isPush);
-                if (isPush) {
-                    MiPushClient.registerPush(GuideApplication.getInstance(), Constants.XIAOMI_PUSNID, Constants.XIAOMI_PUSHKEY);
-                } else {
-                    MiPushClient.unregisterPush(GuideApplication.getInstance());
-                }
+
                 break;
             case FEEDBACK_INDEX:
                 IntentUtils.startFeedbackActivity(this);

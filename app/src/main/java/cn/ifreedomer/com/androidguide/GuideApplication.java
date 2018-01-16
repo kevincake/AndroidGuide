@@ -6,13 +6,9 @@ import android.content.Context;
 import android.os.Process;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.xiaomi.mipush.sdk.MiPushClient;
-
-import net.youmi.android.AdManager;
 
 import java.util.List;
 
-import cn.ifreedomer.com.androidguide.constants.Constants;
 import cn.ifreedomer.com.androidguide.constants.SaveConstants;
 import cn.ifreedomer.com.androidguide.util.SaveUtil;
 
@@ -43,12 +39,12 @@ public class GuideApplication extends Application {
     }
 
     private void initXiaoMIPush() {
-        MiPushClient.registerPush(this, Constants.XIAOMI_PUSNID, Constants.XIAOMI_PUSHKEY);
+//        MiPushClient.registerPush(this, Constants.XIAOMI_PUSNID, Constants.XIAOMI_PUSHKEY);
     }
 
 
     public void initWandoujiaADSDK() {
-        AdManager.getInstance(mContext).init(Constants.YOUMI_ID, Constants.YOUMI_SCECRET, true);
+//        AdManager.getInstance(mContext).init(Constants.YOUMI_ID, Constants.YOUMI_SCECRET, true);
     }
 
     private boolean shouldInit() {
