@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
@@ -35,11 +35,11 @@ import cn.ifreedomer.com.androidguide.widget.SettingItemView;
 import cn.ifreedomer.com.androidguide.widget.TipsDialog;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener, LoadingDialog.onLoadCancelLisener, DownLoadManager.DownLoaderListener, CompoundButton.OnCheckedChangeListener {
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.ll_layout)
+    @BindView(R.id.ll_layout)
     LinearLayout llLayout;
-    @Bind(R.id.rootview)
+    @BindView(R.id.rootview)
     RelativeLayout rootview;
     private ArrayList<SettingItemView> itemViews = new ArrayList<>();
     private static final int CHECK_UPDATE_INDEX = 0;

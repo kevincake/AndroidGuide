@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import org.markdown4j.Markdown4jProcessor;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
@@ -17,10 +17,10 @@ import cn.ifreedomer.com.androidguide.util.TempUtil;
 import us.feras.mdv.MarkdownView;
 
 public class ReaderActivity extends BaseActivity {
-    @Bind(R.id.markdownview)
+    @BindView(R.id.markdownview)
     MarkdownView markdownview;
     private String TAG = "ReaderActivity";
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar phoneToolbar;
 
 

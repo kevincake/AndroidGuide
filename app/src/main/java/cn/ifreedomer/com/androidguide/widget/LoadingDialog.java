@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 
@@ -27,11 +27,11 @@ public class LoadingDialog extends AlertDialog implements View.OnClickListener {
     }
 
     private onLoadCancelLisener onLoadCancelLisener;
-    @Bind(R.id.content_pb)
+    @BindView(R.id.content_pb)
     ContentLoadingProgressBar contentPb;
-    @Bind(R.id.cancel)
+    @BindView(R.id.cancel)
     TextView cancel;
-    @Bind(R.id.rootview)
+    @BindView(R.id.rootview)
     LinearLayout rootview;
     private Context context;
 

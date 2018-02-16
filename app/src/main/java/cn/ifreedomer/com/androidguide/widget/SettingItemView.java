@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 
@@ -21,11 +21,11 @@ import cn.ifreedomer.com.androidguide.R;
  * @todo:
  */
 public class SettingItemView extends RelativeLayout {
-    @Bind(R.id.title_tv)
+    @BindView(R.id.title_tv)
     TextView titleTv;
-    @Bind(R.id.subtitle_tv)
+    @BindView(R.id.subtitle_tv)
     TextView subtitleTv;
-    @Bind(R.id.swtch)
+    @BindView(R.id.swtch)
     Switch swtch;
     private boolean isShowSwitch = true;
     private boolean isShowSub = false;

@@ -1,15 +1,19 @@
 package cn.ifreedomer.com.androidguide.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
@@ -18,13 +22,13 @@ import cn.ifreedomer.com.androidguide.widget.AboutItemView;
 
 public class AboutActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.icon_iv)
+    @BindView(R.id.icon_iv)
     ImageView iconIv;
-    @Bind(R.id.install_ll)
+    @BindView(R.id.install_ll)
     LinearLayout installLl;
-    @Bind(R.id.visit_ll)
+    @BindView(R.id.visit_ll)
     LinearLayout visitLl;
     private ArrayList<AboutItemView> installList = new ArrayList<>();
 
@@ -69,6 +73,21 @@ public class AboutActivity extends BaseActivity {
 //        for (int i = 0; i < 3; i++) {
 //            visitLl.addView(new AboutItemView(this));
 //        }
+
+
+        MobileAds.initialize(this,
+                "ca-app-pub-1684365898938671~1340621543");
+
+        final InterstitialAd mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-1684365898938671/5028229895");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mInterstitialAd.show();
+
+            }
+        },5000);
+
     }
 
 

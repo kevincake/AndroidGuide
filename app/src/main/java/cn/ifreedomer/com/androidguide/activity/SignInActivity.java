@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ifreedomer.com.androidguide.R;
@@ -22,27 +22,27 @@ import cn.ifreedomer.com.androidguide.util.IntentUtils;
 
 public class SignInActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.account_et)
+    @BindView(R.id.account_et)
     EditText accountEt;
-    @Bind(R.id.usernameWrapper)
+    @BindView(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
-    @Bind(R.id.pwd_et)
+    @BindView(R.id.pwd_et)
     EditText pwdEt;
-    @Bind(R.id.password_rapper)
+    @BindView(R.id.password_rapper)
     TextInputLayout passwordRapper;
-    @Bind(R.id.login_btn)
+    @BindView(R.id.login_btn)
     Button loginBtn;
-    @Bind(R.id.login_forget_tv)
+    @BindView(R.id.login_forget_tv)
     TextView loginForgetTv;
-    @Bind(R.id.wechat_iv)
+    @BindView(R.id.wechat_iv)
     ImageView wechatIv;
-    @Bind(R.id.qq_iv)
+    @BindView(R.id.qq_iv)
     ImageView qqIv;
-    @Bind(R.id.sina_iv)
+    @BindView(R.id.sina_iv)
     ImageView sinaIv;
-    @Bind(R.id.goto_register_tv)
+    @BindView(R.id.goto_register_tv)
     TextView gotoRegisterTv;
 
     @Override

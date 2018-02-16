@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
@@ -15,17 +15,17 @@ import cn.ifreedomer.com.androidguide.mail.MailThread;
 
 public class FeedBackActivity extends BaseActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.sender_et)
+    @BindView(R.id.sender_et)
     EditText senderEt;
-    @Bind(R.id.topic_tv)
+    @BindView(R.id.topic_tv)
     TextView topicTv;
-    @Bind(R.id.topic_et)
+    @BindView(R.id.topic_et)
     EditText topicEt;
-    @Bind(R.id.content_tv)
+    @BindView(R.id.content_tv)
     TextView contentTv;
-    @Bind(R.id.content_et)
+    @BindView(R.id.content_et)
     EditText contentEt;
 
     @Override

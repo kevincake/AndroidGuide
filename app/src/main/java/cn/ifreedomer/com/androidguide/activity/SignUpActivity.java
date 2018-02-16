@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ifreedomer.com.androidguide.R;
@@ -23,29 +23,29 @@ import cn.ifreedomer.com.androidguide.util.IntentUtils;
 
 public class SignUpActivity extends BaseActivity {
     private static final String TAG = "SignUpActivity";
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.fullinfo_username_et)
+    @BindView(R.id.fullinfo_username_et)
     EditText fullinfoUsernameEt;
-    @Bind(R.id.usernameWrapper)
+    @BindView(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
-    @Bind(R.id.input_email_et)
+    @BindView(R.id.input_email_et)
     EditText inputEmailEt;
-    @Bind(R.id.email_wrap)
+    @BindView(R.id.email_wrap)
     TextInputLayout emailWrap;
-    @Bind(R.id.fullinfo_pwd_et)
+    @BindView(R.id.fullinfo_pwd_et)
     EditText fullinfoPwdEt;
-    @Bind(R.id.password_rapper)
+    @BindView(R.id.password_rapper)
     TextInputLayout passwordRapper;
-    @Bind(R.id.fullinfo_pwd_confirm_et)
+    @BindView(R.id.fullinfo_pwd_confirm_et)
     EditText fullinfoPwdConfirmEt;
-    @Bind(R.id.password_confirm_rapper)
+    @BindView(R.id.password_confirm_rapper)
     TextInputLayout passwordConfirmRapper;
-    @Bind(R.id.fullinfo_commit_btn)
+    @BindView(R.id.fullinfo_commit_btn)
     Button fullinfoCommitBtn;
-    @Bind(R.id.back2login_tv)
+    @BindView(R.id.back2login_tv)
     TextView back2loginTv;
-    @Bind(R.id.bottomsheet)
+    @BindView(R.id.bottomsheet)
     BottomSheetLayout bottomsheet;
 
     @Override

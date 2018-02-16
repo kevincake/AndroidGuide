@@ -24,8 +24,6 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.base.adapter.recyclerview.DividerItemDecoration;
 
-
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -40,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 import cn.ifreedomer.com.androidguide.activity.base.BaseActivity;
@@ -65,15 +63,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public static final int COMPONENT_INDEX = 1;
     public static final int PRESISENT_INDEX = 2;
 
-    @Bind(R.id.frame_content)
+    @BindView(R.id.frame_content)
     FrameLayout frameContent;
-    @Bind(R.id.navigationmenu)
+    @BindView(R.id.navigationmenu)
     ExpandableListView navigationmenu;
-    @Bind(R.id.navigation_view)
+    @BindView(R.id.navigation_view)
     NavigationView navigationView;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @Bind(R.id.ad_root_ll)
+    @BindView(R.id.ad_root_ll)
     LinearLayout adRootLl;
     private DrawerLayout mDrawerLayout;
     NavExpandAdapter mMenuAdapter;
@@ -98,9 +96,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mToolbar.setTitleTextColor(getResources().getColor(R.color.whiteTextColor));
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         initNavgationView();
-        add_AD();
         Unzip();
-        ;
+
 
 
     }
@@ -124,11 +121,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     }
 
-    public void add_AD() {
-//        AdView adView = new AdView(this, new AdSize(AdSize.FILL_PARENT, AdSize.WRAP_CONTENT));
-//        adRootLl.addView(adView);
-//        adRootLl.setVisibility(View.GONE);
-    }
 
 
     public void Unzip() {

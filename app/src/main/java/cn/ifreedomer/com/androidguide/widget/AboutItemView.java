@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ifreedomer.com.androidguide.R;
 
@@ -17,9 +17,9 @@ import cn.ifreedomer.com.androidguide.R;
  * @todo:
  */
 public class AboutItemView extends RelativeLayout {
-    @Bind(R.id.title_tv)
+    @BindView(R.id.title_tv)
     TextView titleTv;
-    @Bind(R.id.content_tv)
+    @BindView(R.id.content_tv)
     TextView contentTv;
     private Context context;
     private int type;
