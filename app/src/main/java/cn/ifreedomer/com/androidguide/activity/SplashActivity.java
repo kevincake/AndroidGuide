@@ -47,6 +47,12 @@ public class SplashActivity extends AppCompatActivity {
 
 //                mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                enterMain();
+            }
         });
     }
 
