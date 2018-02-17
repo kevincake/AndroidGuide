@@ -1,15 +1,11 @@
 package cn.ifreedomer.com.androidguide.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -75,18 +71,6 @@ public class AboutActivity extends BaseActivity {
 //        }
 
 
-        MobileAds.initialize(this,
-                "ca-app-pub-1684365898938671~1340621543");
-
-        final InterstitialAd mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-1684365898938671/5028229895");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mInterstitialAd.show();
-
-            }
-        },5000);
 
     }
 
