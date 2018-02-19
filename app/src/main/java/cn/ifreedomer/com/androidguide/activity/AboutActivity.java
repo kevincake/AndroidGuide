@@ -1,9 +1,12 @@
 package cn.ifreedomer.com.androidguide.activity;
 
+import android.didikee.donate.AlipayDonate;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -26,6 +29,8 @@ public class AboutActivity extends BaseActivity {
     LinearLayout installLl;
     @BindView(R.id.visit_ll)
     LinearLayout visitLl;
+    @BindView(R.id.donateBtn)
+    Button donateBtn;
     private ArrayList<AboutItemView> installList = new ArrayList<>();
 
     @Override
@@ -69,9 +74,27 @@ public class AboutActivity extends BaseActivity {
 //        for (int i = 0; i < 3; i++) {
 //            visitLl.addView(new AboutItemView(this));
 //        }
+        donateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                donateAlipay("FKX04593OORFSACYVCL0BA");
+            }
+        });
+
+    }
 
 
-
+    /**
+     * 支付宝支付
+     * @param payCode 收款码后面的字符串；例如：收款二维码里面的字符串为 https://qr.alipay.com/stx00187oxldjvyo3ofaw60 ，则
+     *                payCode = stx00187oxldjvyo3ofaw60
+     *                注：不区分大小写
+     */
+    private void donateAlipay(String payCode) {
+        boolean hasInstalledAlipayClient = AlipayDonate.hasInstalledAlipayClient(this);
+        if (hasInstalledAlipayClient) {
+            AlipayDonate.startAlipayClient(this, payCode);
+        }
     }
 
 

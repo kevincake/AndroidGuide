@@ -29,7 +29,11 @@
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activity.ReaderActivity">
         </activity>
@@ -57,13 +61,6 @@
             android:name="UMENG_CHANNEL"
             android:value="test"/>
 
-        <activity android:name=".activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
