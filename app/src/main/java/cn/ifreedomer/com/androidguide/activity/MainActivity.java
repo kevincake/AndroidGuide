@@ -444,7 +444,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                parseAllData();
                 break;
             case R.id.login_tv:
-                IntentUtils.startLoginActivity(this);
+//                IntentUtils.startLoginActivity(this);
                 break;
             case R.id.setting_iv:
                 IntentUtils.startSettingActivity(this);
